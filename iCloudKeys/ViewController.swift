@@ -12,13 +12,14 @@ class ViewController: UIViewController {
 
     // create an ubiquitous key store
     var keyStore: NSUbiquitousKeyValueStore?
+    let keyString = "MyString"
     
     @IBOutlet weak var textField: UITextField!
     
     // user wishes to save
     @IBAction func saveKey(_ sender: Any) {
         
-        keyStore?.set(textField.text, forKey: "MyString")
+        keyStore?.set(textField.text, forKey: keyString)
         keyStore?.synchronize()
     }
     
@@ -34,8 +35,8 @@ class ViewController: UIViewController {
         // create an ubiquitous key store
         keyStore = NSUbiquitousKeyValueStore()
         
-        // determine if the keyStore has "My String"
-        let storedString = keyStore?.string(forKey: "MyString")
+        // determine if the keyStore has "MyString"
+        let storedString = keyStore?.string(forKey: keyString)
         if let stringValue = storedString {
             textField.text = stringValue
         }
@@ -52,7 +53,7 @@ class ViewController: UIViewController {
         
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
-        textField.text = keyStore?.string(forKey: "MyString")
+        textField.text = keyStore?.string(forKey: keyString)
     }
     
     override func didReceiveMemoryWarning() {
